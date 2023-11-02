@@ -1,6 +1,6 @@
 import sqlite3
 
-conn = sqlite3.connect("bilbioteca.db")
+conn = sqlite3.connect("./bilbioteca.db")
 cursor = conn.cursor()
 
 #CREACION DE TABLAS
