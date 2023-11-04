@@ -1,49 +1,13 @@
 import tkinter as tk
 import sqlite3
 
-"""
-def consultar_clientes():
-    
-    nombre = entrada_nombre.get()
-   
-    resultado_consulta = ["Cliente 1", "Cliente 2", "Cliente 3"]
-    
-   
-    grilla.delete(0, tk.END)
-    
-    
-    for cliente in resultado_consulta:
-        grilla.insert(tk.END, cliente)
-
-ventana = tk.Tk()
-ventana.title("Consulta de Clientes")
-
-
-etiqueta_nombre = tk.Label(ventana, text="Nombre del Cliente:")
-etiqueta_nombre.pack()
-
-
-entrada_nombre = tk.Entry(ventana)
-entrada_nombre.pack()
-
-
-boton_consultar = tk.Button(ventana, text="Consultar", command=consultar_clientes)
-boton_consultar.pack()
-
-grilla = tk.Listbox(ventana)
-grilla.pack()
-
-ventana.mainloop()
-"""
-
-
 def consultarLibrosBD(entradaTitulo):
     
     libro = entradaTitulo.get()
     
-    conn = sqlite3.connect("S:\Documents\Documentos Ema\DAO\TP Dao\biblioteca.db")
+    conn = sqlite3.connect("./biblioteca.db")
     cursor = conn.cursor()
-    sql = '''SELECT l.codigo, l.titulo, l.precioReposicion, l.estado From libros l WHERE l.titulo = ?'''
+    sql = '''SELECT l.* From libros l WHERE l.titulo = ?'''
     cursor.execute(sql, (libro))
     
     resultado = cursor.fetchall()
