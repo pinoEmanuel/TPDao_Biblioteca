@@ -24,3 +24,16 @@ Los datos deben ser almacenados en una base de datos sqlite cuyo diseño y creac
 La interfaz de usuario debe ser una interfaz gráfica con ventanas usando tkinter.
 Todos los datos ingresados por el usuario deben ser correctamente validados.
 La entrega se realiza mediante el módulo de tareas de la UV de un único archivo comprimido que incluya únicamente los archivos de código fuente, el archivo de la base de datos y el diagrama de entidad-relación.
+
+*Ventana consultar libros
+*Ventana agregar/eliminar libros
+
+*Ventana agregar/eliminar socios
+*Ventana consultar socios
+
+*Ventana nuevo prestamo
+*Ventana consultar prestamo (en donde se puedan consultar todos/consultar uno y a ese seleccionado actualizar estado como devuelto)
+
+*Ventana registrar libro extraviado (se actualiza el estado del libro como "Extraviado")
+
+*Ventana reportes
