@@ -49,10 +49,8 @@ class VentanaAgregarLibro:
         crearLibroBD(titulo, precioRep)
         
     def cancelar(self):
-        self.ventana.quit()
+        self.ventana.destroy()
         
     
     def mostrar(self):
         self.ventana.mainloop()
-        
-VentanaAgregarLibro().mostrar()

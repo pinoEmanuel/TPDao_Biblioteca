@@ -1,71 +1,70 @@
 import sqlite3
 from datetime import date, timedelta
 
-
-def cantLibrosXEstado():
-    conn = sqlite3.connect("../biblioteca.db")
+def cantidadLibrosXEstado():
+    conn = sqlite3.connect("./biblioteca.db")
     cursor = conn.cursor()
     cursor.execute('''SELECT estado, COUNT(*) AS cantidad FROM libros GROUP BY estado''')
 
 #Devuelve listado REVISAR Y HACER VISUALES
-    res = cursor.fetchall()
+    resultado = cursor.fetchall()
 
     conn.commit()
     conn.close()
 
-    return print(res)
+    return print(resultado)
 
-def sumatoriaPrecioRep():
-    conn = sqlite3.connect("../biblioteca.db")
+def sumatoriaPrecioRepLibrosExtraviados():
+    conn = sqlite3.connect("./biblioteca.db")
     cursor = conn.cursor()
     cursor.execute('''SELECT sum(l.precioReposicion) as sumaTotal FROM libros l where l.estado="Extraviado"''')
 
 #Devuelve listado REVISAR Y HACER VISUALES
-    res = cursor.fetchall()
+    resultado = cursor.fetchall()
 
     conn.commit()
     conn.close()
 
-    return print(res)
+    return print(resultado)
 
-def solicitantesLibro(libro):
-    conn = sqlite3.connect("../biblioteca.db")
+def solicitantesLibroXTitulo(titulo):
+    conn = sqlite3.connect("./biblioteca.db")
     cursor = conn.cursor()
     sql = '''SELECT s.nombre, s.apellido FROM prestamos p, libros l, socios s WHERE p.idCliente=s.idCliente and p.codigoLibro=l.codigo and l.titulo=?'''
-    cursor.execute(sql, (libro,))
+    cursor.execute(sql, (titulo,))
 
 #Devuelve listado REVISAR Y HACER VISUALES
-    res = cursor.fetchall()
+    resultado = cursor.fetchall()
 
     conn.commit()
     conn.close()
 
-    return print(res)
+    return print(resultado)
 
-def prestamosDeSocio(socio):
-    conn = sqlite3.connect("../biblioteca.db")
+def prestamosDeSocio(idSocio):
+    conn = sqlite3.connect("./biblioteca.db")
     cursor = conn.cursor()
     sql = '''SELECT p.* FROM prestamos p, socios s WHERE p.idCliente=s.idCliente and p.idCliente=?'''
-    cursor.execute(sql, (socio,))
+    cursor.execute(sql, (idSocio,))
 
 #Devuelve listado REVISAR Y HACER VISUALES
-    res = cursor.fetchall()
+    resultado = cursor.fetchall()
 
     conn.commit()
     conn.close()
 
-    return print(res)
+    return print(resultado)
 
 def prestamosDemorados():
-    conn = sqlite3.connect("../biblioteca.db")
+    conn = sqlite3.connect("./biblioteca.db")
     cursor = conn.cursor()
     cursor.execute('''SELECT p.* FROM prestamos p, libros l WHERE p.codigoLibro=l.codigo and l.estado="Prestado"''')
 
 #Devuelve listado REVISAR Y HACER VISUALES
-    res = cursor.fetchall()
+    resultado = cursor.fetchall()
     demorados = []
-    print("res", res)
-    for p in res:
+    print("res", resultado)
+    for p in resultado:
         print("p", p)
         suma = timedelta(days=p[4])
         if date.today() > p[3]+suma:
@@ -75,8 +74,6 @@ def prestamosDemorados():
     conn.close()
 
     return print(demorados)
-
-prestamosDemorados()
 
 # def cantLibrosXEstado(self):
 #     c = [0, 0, 0]

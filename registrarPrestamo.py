@@ -63,10 +63,8 @@ class VentanaRegistrarPrestamo:
         else:
             registrarPrestamoBD(titulo, idSocio, cantDiasPrestamo)
         
-        
     def cancelar(self):
-        self.ventana.quit()
+        self.ventana.destroy()
             
     def mostrar(self):
         self.ventana.mainloop()
-        

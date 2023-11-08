@@ -59,4 +59,4 @@ class VentanaConsultarLibro:
     def mostrar(self):
         self.ventana.mainloop()
         
-VentanaConsultarLibro().mostrar()
+#VentanaConsultarLibro().mostrar()

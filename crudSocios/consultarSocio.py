@@ -57,4 +57,4 @@ class VentanaConsultarSocio:
     def mostrar(self):
         self.ventana.mainloop()
         
-VentanaConsultarSocio().mostrar()
+#VentanaConsultarSocio().mostrar()

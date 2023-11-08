@@ -49,10 +49,9 @@ class VentanaAgregarSocio:
         crearSocioBD(nombre, apellido)
         
     def cancelar(self):
-        self.ventana.quit()
+        self.ventana.destroy()
         
     
     def mostrar(self):
         self.ventana.mainloop()
         
-VentanaAgregarSocio().mostrar()
