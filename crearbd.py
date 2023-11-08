@@ -47,6 +47,12 @@ cursor.execute('''INSERT INTO libros (titulo, precioReposicion, estado) VALUES (
 cursor.execute('''INSERT INTO libros (titulo, precioReposicion, estado) VALUES ("Frankenstein, de Mary W. Shelley. ", 100, "Disponible")''')
 cursor.execute('''INSERT INTO libros (titulo, precioReposicion, estado) VALUES ("Los juegos del hambre, de Suzanne Collins.", 100, "Disponible")''')
 """
+#cursor.execute('''INSERT INTO libros (titulo, precioReposicion, estado) VALUES ("Frankenstein, de Mary W. Shelley. ", 100, "Extraviado")''')
+
+#INSERCION DE PRESTAMOS
+
+cursor.execute('''INSERT INTO libros (titulo, precioReposicion, estado) VALUES ("Un mundo , de Aldous Huxley", 100, "Prestado")''')
+cursor.execute('''INSERT INTO prestamos (idCliente, codigoLibro, fechaPrestamo, cantDiasDevolucion) VALUES (2, 15, '8/4/2023', 20)''')
 
 #INSERCION DE CLIENTES
 
@@ -61,7 +67,7 @@ cursor.execute('''INSERT INTO socios (nombre, apellido) VALUES ("PAULA", "CUFRE"
 """
 
 
-#conn.commit()
+conn.commit()
 
 cursor.execute('''SELECT * From libros''')
 res = cursor.fetchall()

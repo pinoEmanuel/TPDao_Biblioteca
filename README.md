@@ -7,19 +7,19 @@ Todo libro prestado y que posea más de 30 días de demora en su devolución se 
 Cuando un socio solicite un libro el software debe verificar que el socio no posea más de tres libros prestados (aunque todavía se encuentre dentro del plazo del préstamo) y que no posea ningún libro con demora en su devolución.
 
 La biblioteca requiere que el software ofrezca como mínimo las funcionalidades de:
-
 Administración de socios
 Administración de libros
 Registración de préstamos y devoluciones
 Registración de libros extraviados
+
 Reportes:
 Cantidad de libros en cada estado (tres totales)
 Sumatoria del precio de reposición de todos los libros extraviados
 Nombre de todos los solicitantes de un libro en particular identificado por su título
 Listado de préstamos de un socio identificado por su número de socio
 Listado de préstamos demorados
-Condiciones de entrega:
 
+Condiciones de entrega:
 Los datos deben ser almacenados en una base de datos sqlite cuyo diseño y creación es responsabilidad del grupo.
 La interfaz de usuario debe ser una interfaz gráfica con ventanas usando tkinter.
 Todos los datos ingresados por el usuario deben ser correctamente validados.
