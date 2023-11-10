@@ -12,7 +12,7 @@ class Libro:
             raise TypeError("el codigo debe ser un entero")
         if not isinstance(titulo, str):
             raise TypeError("el titulo debe ser un string")
-        if not isinstance(precioReposicion, float):
+        if not isinstance(precioReposicion, int):
             raise TypeError("el precio debe ser un float")
         if not isinstance(estado, str):
             raise TypeError("el estado debe ser un string")

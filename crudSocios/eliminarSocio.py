@@ -1,5 +1,6 @@
 from tkinter import *
 import sqlite3
+from tkinter import messagebox
 
 def eliminarSocioBD(codigo):
 
@@ -7,10 +8,12 @@ def eliminarSocioBD(codigo):
     cursor = conn.cursor()
     
     sql = ('''DELETE FROM socios WHERE idCliente = ?''')
-    cursor.execute(sql, (codigo))
+    cursor.execute(sql, (codigo,))
     
     conn.commit()
     conn.close()
+    messagebox.showinfo("Éxito", "Socio eliminado correctamente.")
+    
     
 class VentanaEliminarSocio:
     def __init__(self):
@@ -43,7 +46,7 @@ class VentanaEliminarSocio:
         eliminarSocioBD(codigo)
         
     def cancelar(self):
-        self.ventana.quit()
+        self.ventana.destroy()
         
     
     def mostrar(self):

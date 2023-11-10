@@ -2,6 +2,8 @@ from tkinter import *
 import sqlite3
 from crudLibro.consultarLibros import *
 from crudSocios.consultarSocio import *
+import sys
+sys.path.insert(0, "..\TP Dao")
 from entidades.prestamo import *
 
 def registrarPrestamoBD(titulo, idSocio, cantDiasPrestamo):
@@ -68,3 +70,4 @@ class VentanaRegistrarPrestamo:
             
     def mostrar(self):
         self.ventana.mainloop()
+VentanaRegistrarPrestamo().mostrar()

@@ -1,17 +1,23 @@
 from tkinter import *
 import sqlite3
-from entidades.libro import *
+from tkinter import messagebox
+
+import sys
+sys.path.insert(0, "..\TP Dao")
+from entidades.libro import Libro
+
 
 def crearLibroBD(titulo, precioRep):
 
-    nuevoLibro = Libro(titulo, precioRep)
+    nuevoLibro = Libro(titulo, precioRep, "Disponible")
     
     conn = sqlite3.connect("./biblioteca.db")
     cursor = conn.cursor()
     
-    cursor.execute('''INSERT INTO libros (titulo, precioReposicion, estado) VALUES (?, ?, ?)''', (nuevoLibro._titulo, nuevoLibro._precioReposicion, "Disponible"))
+    cursor.execute('''INSERT INTO libros (titulo, precioReposicion, estado) VALUES (?, ?, ?)''', (nuevoLibro._titulo, nuevoLibro._precioReposicion, nuevoLibro._estado))
     conn.commit()
     conn.close()
+    messagebox.showinfo("Exito", "Libro añadido correctamente.")
     
 class VentanaAgregarLibro:
     def __init__(self):
@@ -47,6 +53,7 @@ class VentanaAgregarLibro:
         titulo = self.txt_titulo.get()
         precioRep = int(self.txt_precioRep.get())
         crearLibroBD(titulo, precioRep)
+            
         
     def cancelar(self):
         self.ventana.destroy()

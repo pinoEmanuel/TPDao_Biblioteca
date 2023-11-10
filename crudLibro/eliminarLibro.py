@@ -1,5 +1,6 @@
 from tkinter import *
 import sqlite3
+from tkinter import messagebox
 
 def eliminarLibroBD(codigo):
 
@@ -7,10 +8,12 @@ def eliminarLibroBD(codigo):
     cursor = conn.cursor()
     
     sql = ('''DELETE FROM libros WHERE codigo = ?''')
-    cursor.execute(sql, (codigo))
+    cursor.execute(sql, (codigo,))
     
     conn.commit()
     conn.close()
+    
+    messagebox.showinfo("Éxito", "Libro eliminado correctamente.")
     
 class VentanaEliminarLibro:
     def __init__(self):
@@ -44,10 +47,10 @@ class VentanaEliminarLibro:
         eliminarLibroBD(codigo)
         
     def cancelar(self):
-        self.ventana.quit()
+        self.ventana.destroy()
         
     
     def mostrar(self):
         self.ventana.mainloop()
-        
-#VentanaEliminarLibro().mostrar()
+
+VentanaEliminarLibro().mostrar()

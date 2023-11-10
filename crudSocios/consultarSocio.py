@@ -51,10 +51,8 @@ class VentanaConsultarSocio:
         
         
     def cancelar(self):
-        self.ventana.quit()
+        self.ventana.destroy()
         
     
     def mostrar(self):
         self.ventana.mainloop()
-        
-#VentanaConsultarSocio().mostrar()

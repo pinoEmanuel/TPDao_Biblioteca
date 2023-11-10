@@ -51,8 +51,8 @@ cursor.execute('''INSERT INTO libros (titulo, precioReposicion, estado) VALUES (
 
 #INSERCION DE PRESTAMOS
 
-cursor.execute('''INSERT INTO libros (titulo, precioReposicion, estado) VALUES ("Un mundo , de Aldous Huxley", 100, "Prestado")''')
-cursor.execute('''INSERT INTO prestamos (idCliente, codigoLibro, fechaPrestamo, cantDiasDevolucion) VALUES (2, 15, '8/4/2023', 20)''')
+#cursor.execute('''INSERT INTO libros (titulo, precioReposicion, estado) VALUES ("Un mundo , de Aldous Huxley", 100, "Prestado")''')
+#cursor.execute('''INSERT INTO prestamos (idCliente, codigoLibro, fechaPrestamo, cantDiasDevolucion) VALUES (2, 15, '8/4/2023', 20)''')
 
 #INSERCION DE CLIENTES
 
@@ -78,5 +78,8 @@ cursor.execute('''SELECT * From socios''')
 res = cursor.fetchall()
 for fila in res:
     print(f"Codigo cliente: {fila[0]}, Nombre: {fila[1]}, Apellido: {fila[2]}")
+
+cursor.execute('''SELECT * From prestamos''')
+print(cursor.fetchall())
 
 conn.close()

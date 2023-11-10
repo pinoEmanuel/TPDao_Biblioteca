@@ -1,6 +1,10 @@
 from tkinter import *
 import sqlite3
-#from entidades.socio import Socio
+from tkinter import messagebox
+
+import sys
+sys.path.insert(0, "..\TP Dao")
+from entidades.socio import Socio
 
 def crearSocioBD(nombre, apellido):
     
@@ -12,6 +16,8 @@ def crearSocioBD(nombre, apellido):
     cursor.execute('''INSERT INTO socios (nombre, apellido) VALUES (?, ?)''', (nuevoSocio._nombre, nuevoSocio._apellido))
     conn.commit()
     conn.close()
+    
+    messagebox.showinfo("Éxito", "Socio agregado correctamente.")
 
 class VentanaAgregarSocio:
     def __init__(self):
@@ -54,4 +60,3 @@ class VentanaAgregarSocio:
     
     def mostrar(self):
         self.ventana.mainloop()
-        

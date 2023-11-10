@@ -1,12 +1,13 @@
 from tkinter import *
 import sqlite3
+from tkinter import messagebox
 
 def consultarLibrosBD(titulo):
     
     conn = sqlite3.connect("./biblioteca.db")
     cursor = conn.cursor()
     sql = '''SELECT l.* From libros l WHERE l.titulo = ?'''
-    cursor.execute(sql, (titulo))
+    cursor.execute(sql, (titulo,))
     
     resultado = cursor.fetchall()
     
@@ -49,14 +50,16 @@ class VentanaConsultarLibro:
     def aceptar(self):
         
         titulo = self.txt_titulo.get()
-        consultarLibrosBD(titulo)
+        if not titulo:
+            messagebox.showerror("Error", "Ingrese el titulo de un libro a buscar.")
+        else:
+            consultarLibrosBD(titulo)
+            
         
         
     def cancelar(self):
-        self.ventana.quit()
+        self.ventana.destroy()
         
     
     def mostrar(self):
         self.ventana.mainloop()
-        
-#VentanaConsultarLibro().mostrar()

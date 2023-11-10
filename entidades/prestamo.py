@@ -1,6 +1,8 @@
 from datetime import *
-from socio import *
-from libro import *
+import sys
+sys.path.insert(0, "..\TP Dao")
+from socio import Socio
+from libro import Libro
 
 class Prestamo:
     def __init__(self, fecha, cantDiasDevolucion, socio, libro, codigoPrestamo=0):
