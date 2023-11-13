@@ -1,4 +1,4 @@
-from tkinter import *
+from tkinter import Tk, Label, Entry, Button, Frame, ttk
 import sqlite3
 from tkinter import messagebox
 
@@ -14,10 +14,10 @@ def consultarLibrosBD(titulo):
     libros = []
     for libro in resultado:
         libros.append(libro)
-        
+
     conn.commit()
     conn.close()
-    
+
     return libros
 
 class VentanaConsultarLibro:
@@ -33,7 +33,16 @@ class VentanaConsultarLibro:
         self.txt_titulo = Entry(self.ventana, width=40)
         self.txt_titulo.grid(column=1, row=0, sticky="w")
         
-        Listbox(self.ventana).grid(column=1, row=1, sticky="w")
+        self.tree = ttk.Treeview(self.ventana, show='headings', columns=('ID', 'Titulo', 'PrecioReposicion', 'Estado'))
+        self.tree.heading('#1', text='ID')
+        self.tree.heading('#2', text='Titulo')
+        self.tree.heading('#3', text='PrecioReposicion')
+        self.tree.heading('#4', text='Estado')
+        self.tree.column('#1', minwidth=50, width=50, anchor="center")
+        self.tree.column('#2', minwidth=50, width=200, anchor="center")
+        self.tree.column('#3', minwidth=50, width=125, anchor="center")
+        self.tree.column('#4', minwidth=50, width=100, anchor="center")
+        self.tree.grid(column=1, row=1, sticky="w")
         
         botones = Frame(self.ventana)
         botones.grid(column=1, row=4, sticky="e")
@@ -48,12 +57,15 @@ class VentanaConsultarLibro:
         botonCancelar["command"] = self.cancelar
     
     def aceptar(self):
-        
         titulo = self.txt_titulo.get()
         if not titulo:
             messagebox.showerror("Error", "Ingrese el titulo de un libro a buscar.")
         else:
-            consultarLibrosBD(titulo)
+            datosLibro = consultarLibrosBD(titulo)
+            for row in self.tree.get_children():
+                self.tree.delete(row)
+            for libro in datosLibro:
+                self.tree.insert('', 0, values=libro)
             
         
         

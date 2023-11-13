@@ -32,6 +32,7 @@ from crudLibro.agregarLibro import VentanaAgregarLibro
 from crudLibro.consultarLibros import VentanaConsultarLibro
 from crudLibro.eliminarLibro import VentanaEliminarLibro
 #from registrarPrestamo import VentanaRegistrarPrestamo
+
 class VentanaMain:
     def __init__(self):
         
@@ -91,9 +92,11 @@ class VentanaMain:
     def regCliente(self):
         nuevaVentana = VentanaAgregarSocio()
         nuevaVentana.mostrar()
+
     def consultarCliente(self):
         nuevaVentana = VentanaConsultarSocio()
         nuevaVentana.mostrar()
+
     def eliminarCliente(self):
         nuevaVentana = VentanaEliminarSocio()
         nuevaVentana.mostrar()
@@ -101,9 +104,11 @@ class VentanaMain:
     def regLibro(self):
         nuevaVentana = VentanaAgregarLibro()
         nuevaVentana.mostrar()
+
     def consultarLibro(self):
         nuevaVentana = VentanaConsultarLibro()
         nuevaVentana.mostrar()
+
     def eliminarLibro(self):
         nuevaVentana = VentanaEliminarLibro()
         nuevaVentana.mostrar()

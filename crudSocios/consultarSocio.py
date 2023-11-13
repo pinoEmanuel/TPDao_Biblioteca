@@ -1,4 +1,4 @@
-from tkinter import *
+from tkinter import Tk, Label, Entry, Button, Frame, ttk
 import sqlite3
 
 def consultarSociosBD(idSocio):
@@ -7,7 +7,7 @@ def consultarSociosBD(idSocio):
     cursor = conn.cursor()
     
     sql = '''SELECT s.* From socios s WHERE s.idCliente = ?'''
-    cursor.execute(sql, (idSocio))
+    cursor.execute(sql, (idSocio,))
     
     resultado = cursor.fetchall()
     
@@ -17,6 +17,8 @@ def consultarSociosBD(idSocio):
     
     conn.commit()
     conn.close()
+    return socios
+
 class VentanaConsultarSocio:
     def __init__(self):
         
@@ -29,8 +31,15 @@ class VentanaConsultarSocio:
         
         self.txt_idSocio = Entry(self.ventana, width=40)
         self.txt_idSocio.grid(column=1, row=0, sticky="w")
-        
-        Listbox(self.ventana).grid(column=1, row=1, sticky="w")
+
+        self.tree = ttk.Treeview(self.ventana, show='headings', columns=('ID', 'Nombre', 'Apellido'))
+        self.tree.heading('#1', text='ID')
+        self.tree.heading('#2', text='Nombre')
+        self.tree.heading('#3', text='Appellido')
+        self.tree.column('#1', minwidth=50, width=50, anchor="center")
+        self.tree.column('#2', minwidth=50, width=100, anchor="center")
+        self.tree.column('#3', minwidth=50, width=100, anchor="center")
+        self.tree.grid(column=1, row=1, sticky="w")
         
         botones = Frame(self.ventana)
         botones.grid(column=1, row=4, sticky="e")
@@ -45,14 +54,16 @@ class VentanaConsultarSocio:
         botonCancelar["command"] = self.cancelar
     
     def aceptar(self):
-        
         idSocio = self.txt_idSocio.get()
-        consultarSociosBD(idSocio)
-        
-        
+        datosSocio = consultarSociosBD(idSocio)
+        for row in self.tree.get_children():
+            self.tree.delete(row)
+        for socio in datosSocio:
+            self.tree.insert('', 0, values=socio)
+
     def cancelar(self):
         self.ventana.destroy()
-        
-    
+
     def mostrar(self):
         self.ventana.mainloop()
+

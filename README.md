@@ -1,3 +1,4 @@
+
 Una biblioteca necesita un software que le permita registrar los datos de los libros que posee y de sus préstamos. De cada libro conoce como mínimo su código, título, precio de reposición (para el caso de extravíos o daños) y estado (disponible, prestado o extraviado).
 
 Por otro lado, cada vez que un libro es prestado se registra el socio que lo solicita y la cantidad de días pactados para su devolución. Cuando un libro es devuelto debe calcularse si fue devuelto en fecha o con demora, registrando si corresponde la cantidad de días de retraso.
