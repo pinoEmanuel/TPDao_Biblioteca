@@ -13,7 +13,7 @@ def crearSocioBD(nombre, apellido):
     conn = sqlite3.connect("./biblioteca.db")
     cursor = conn.cursor()
     
-    cursor.execute('''INSERT INTO socios (nombre, apellido) VALUES (?, ?)''', (nuevoSocio._nombre, nuevoSocio._apellido))
+    cursor.execute('''INSERT INTO socios (nombre, apellido) VALUES (?, ?)''', (nuevoSocio.nombre, nuevoSocio.apellido))
     conn.commit()
     conn.close()
     
