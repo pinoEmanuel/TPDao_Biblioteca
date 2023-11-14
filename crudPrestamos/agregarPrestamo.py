@@ -8,6 +8,7 @@ def crearPrestamo(socio, libro, fecha, cantDiasDevolucion):
     cursor = conn.cursor()
     
     cursor.execute('''INSERT INTO prestamos (idCliente, codigoLibro, fechaPrestamo, cantDiasDevolucion) VALUES (?, ?, ?, ?)''', (socio, libro, fecha, cantDiasDevolucion))
+    cursor.execute('''UPDATE libros SET estado="Prestado" WHERE codigo=?''', (libro))
     conn.commit()
     conn.close()
     

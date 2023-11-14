@@ -8,6 +8,7 @@ from crudLibro.eliminarLibro import VentanaEliminarLibro
 from crudLibro.libroExtraviado import VentanaLibroExtraviado
 from reportes.reportes import VentanaReportes
 from crudPrestamos.agregarPrestamo import VentanaAgregarPrestamo
+from crudPrestamos.consultarPrestamo import VentanaConsultarPrestamo
 
 class VentanaMain:
     def __init__(self):
@@ -22,6 +23,9 @@ class VentanaMain:
         
         botonRegPrestamo = Button(botones, text="Registrar nuevo prestamo", width=20, height=2)
         botonRegPrestamo.pack(side=TOP, padx=10, pady=5, anchor=W)   
+
+        botonConsultarPrestamo = Button(botones, text="Consultar prestamo", width=20, height=2)
+        botonConsultarPrestamo.pack(side=TOP, padx=10, pady=5, anchor=W)  
           
         botonRegCliente = Button(botones, text="Registrar socio", width=20, height=2)     
         botonRegCliente.pack(side=TOP, padx=10, pady=5, anchor=W) 
@@ -51,6 +55,7 @@ class VentanaMain:
         botonCancelar.pack(side=RIGHT, anchor=SE, padx=10, pady=5)
         
         botonRegPrestamo["command"] = self.regPrestamo
+        botonConsultarPrestamo["command"] = self.consultarPrestamo
         botonRegCliente["command"] = self.regCliente
         botonConsultarCliente["command"] = self.consultarCliente
         botonEliminarCliente["command"] = self.eliminarCliente
@@ -65,6 +70,10 @@ class VentanaMain:
         nuevaVentana = VentanaAgregarPrestamo()
         nuevaVentana.mostrar()
     
+    def consultarPrestamo(self):
+        nuevaVentana = VentanaConsultarPrestamo()
+        nuevaVentana.mostrar()
+
     def regCliente(self):
         nuevaVentana = VentanaAgregarSocio()
         nuevaVentana.mostrar()

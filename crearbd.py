@@ -66,8 +66,6 @@ cursor.execute('''INSERT INTO socios (nombre, apellido) VALUES ("HORACIO", "DELG
 cursor.execute('''INSERT INTO socios (nombre, apellido) VALUES ("PAULA", "CUFRE") ''')
 """
 
-cursor.execute('''DELETE FROM prestamos WHERE codigoPrestamo=6''')
-
 conn.commit()
 
 cursor.execute('''SELECT * From libros''')
