@@ -65,7 +65,7 @@ cursor.execute('''INSERT INTO socios (nombre, apellido) VALUES ("PABLO", "BEIZA"
 cursor.execute('''INSERT INTO socios (nombre, apellido) VALUES ("HORACIO", "DELGADINO") ''')
 cursor.execute('''INSERT INTO socios (nombre, apellido) VALUES ("PAULA", "CUFRE") ''')
 """
-
+cursor.execute('''INSERT INTO prestamos (idCliente, codigoLibro, fechaPrestamo, cantDiasDevolucion) VALUES (2, 21, '8/5/2023', 20)''')
 
 conn.commit()
 

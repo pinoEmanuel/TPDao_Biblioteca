@@ -31,6 +31,7 @@ from crudSocios.eliminarSocio import VentanaEliminarSocio
 from crudLibro.agregarLibro import VentanaAgregarLibro
 from crudLibro.consultarLibros import VentanaConsultarLibro
 from crudLibro.eliminarLibro import VentanaEliminarLibro
+from reportes.reportes import VentanaReportes
 #from registrarPrestamo import VentanaRegistrarPrestamo
 
 class VentanaMain:
@@ -114,7 +115,8 @@ class VentanaMain:
         nuevaVentana.mostrar()
     
     def reportes(self):
-        pass
+        nuevaVentana = VentanaReportes()
+        nuevaVentana.mostrar()
 
     def cancelar(self):
         self.ventana.destroy()

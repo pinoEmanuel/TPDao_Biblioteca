@@ -1,79 +1,71 @@
-import sqlite3
-from datetime import date, timedelta
+from tkinter import *
+from reportes.cantidadLibrosXEstado import VentanaCantidadLibrosXEstado
+from reportes.sumatoria import VentanaSumatoria
+from reportes.solicitantes import VentanaSolicitantes
+from reportes.prestamosDeSocio import VentanaPrestamosDeSocio
+from reportes.demorados import VentanaDemorados
 
-def cantidadLibrosXEstado():
-    conn = sqlite3.connect("./biblioteca.db")
-    cursor = conn.cursor()
-    cursor.execute('''SELECT estado, COUNT(*) AS cantidad FROM libros GROUP BY estado''')
+class VentanaReportes:
+    def __init__(self):
+        
+        self.ventana = Tk()
+        
+        self.ventana.title("Reportes")
+        self.ventana.geometry("600x600")
+        
+        botones = Frame(self.ventana)
+        botones.pack(padx=10, pady=50, anchor=NW)
+        
+        botonLibXEstado = Button(botones, text="Cant libros por estado", width=20, height=2)
+        botonLibXEstado.pack(side=TOP, padx=10, pady=5, anchor=W)   
+          
+        botonSumatoria = Button(botones, text="Sumatoria precio rep", width=20, height=2)     
+        botonSumatoria.pack(side=TOP, padx=10, pady=5, anchor=W) 
+        
+        botonSolicitantes = Button(botones, text="Solicitantes libro", width=20, height=2)     
+        botonSolicitantes.pack(side=TOP, padx=10, pady=5, anchor=W) 
+        
+        botonPrestamosSocio = Button(botones, text="Prestamos de socio", width=20, height=2)     
+        botonPrestamosSocio.pack(side=TOP, padx=10, pady=5, anchor=W) 
+            
+        botonDemorados = Button(botones, text="Prestamos demorados", width=20, height=2) 
+        botonDemorados.pack(side=TOP, padx=10, pady=5, anchor=W)
 
-#Devuelve listado REVISAR Y HACER VISUALES
-    resultado = cursor.fetchall()
+        botonCancelar = Button(text="Salir", width=20, height=2)
+        botonCancelar.pack(side=RIGHT, anchor=SE, padx=10, pady=5)
 
-    conn.commit()
-    conn.close()
+        botonLibXEstado["command"] = self.cantidadLibrosXEstado
+        botonSumatoria["command"] = self.sumatoriaPrecioRepLibrosExtraviados
+        botonSolicitantes["command"] = self.solicitantesLibroXTitulo
+        botonPrestamosSocio["command"] = self.prestamosDeSocio
+        botonDemorados["command"] = self.prestamosDemorados
+        botonCancelar["command"] = self.cancelar
+        
+    def cantidadLibrosXEstado(self):
+        nuevaVentana = VentanaCantidadLibrosXEstado()
+        nuevaVentana.mostrar()
+    
+    def sumatoriaPrecioRepLibrosExtraviados(self):
+        nuevaVentana = VentanaSumatoria()
+        nuevaVentana.mostrar()
 
-    return print(resultado)
+    def solicitantesLibroXTitulo(self):
+        nuevaVentana = VentanaSolicitantes()
+        nuevaVentana.mostrar()
 
-def sumatoriaPrecioRepLibrosExtraviados():
-    conn = sqlite3.connect("./biblioteca.db")
-    cursor = conn.cursor()
-    cursor.execute('''SELECT sum(l.precioReposicion) as sumaTotal FROM libros l where l.estado="Extraviado"''')
+    def prestamosDeSocio(self):
+        nuevaVentana = VentanaPrestamosDeSocio()
+        nuevaVentana.mostrar()
+    
+    def prestamosDemorados(self):
+        nuevaVentana = VentanaDemorados()
+        nuevaVentana.mostrar()
 
-#Devuelve listado REVISAR Y HACER VISUALES
-    resultado = cursor.fetchall()
-
-    conn.commit()
-    conn.close()
-
-    return print(resultado)
-
-def solicitantesLibroXTitulo(titulo):
-    conn = sqlite3.connect("./biblioteca.db")
-    cursor = conn.cursor()
-    sql = '''SELECT s.nombre, s.apellido FROM prestamos p, libros l, socios s WHERE p.idCliente=s.idCliente and p.codigoLibro=l.codigo and l.titulo=?'''
-    cursor.execute(sql, (titulo,))
-
-#Devuelve listado REVISAR Y HACER VISUALES
-    resultado = cursor.fetchall()
-
-    conn.commit()
-    conn.close()
-
-    return print(resultado)
-
-def prestamosDeSocio(idSocio):
-    conn = sqlite3.connect("./biblioteca.db")
-    cursor = conn.cursor()
-    sql = '''SELECT p.* FROM prestamos p, socios s WHERE p.idCliente=s.idCliente and p.idCliente=?'''
-    cursor.execute(sql, (idSocio,))
-
-#Devuelve listado REVISAR Y HACER VISUALES
-    resultado = cursor.fetchall()
-
-    conn.commit()
-    conn.close()
-
-    return print(resultado)
-
-def prestamosDemorados():
-    conn = sqlite3.connect("./biblioteca.db")
-    cursor = conn.cursor()
-    cursor.execute('''SELECT p.* FROM prestamos p, libros l WHERE p.codigoLibro=l.codigo and l.estado="Prestado"''')
-
-#Devuelve listado REVISAR Y HACER VISUALES
-    resultado = cursor.fetchall()
-    demorados = []
-    print("res", resultado)
-    for p in resultado:
-        print("p", p)
-        suma = timedelta(days=p[4])
-        if date.today() > p[3]+suma:
-            demorados.append(p)
-
-    conn.commit()
-    conn.close()
-
-    return print(demorados)
+    def cancelar(self):
+        self.ventana.destroy()
+        
+    def mostrar(self):
+        self.ventana.mainloop()
 
 # def cantLibrosXEstado(self):
 #     c = [0, 0, 0]

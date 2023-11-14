@@ -1,6 +1,6 @@
-from PycharmProjects.Facu.tpDAO.TPDao_Biblioteca.entidades.libro import Libro
-from PycharmProjects.Facu.tpDAO.TPDao_Biblioteca.entidades.prestamo import Prestamo
-from PycharmProjects.Facu.tpDAO.TPDao_Biblioteca.entidades.socio import Socio
+from entidades.libro import Libro
+from entidades.prestamo import Prestamo
+from entidades.socio import Socio
 
 class Biblioteca:
 
