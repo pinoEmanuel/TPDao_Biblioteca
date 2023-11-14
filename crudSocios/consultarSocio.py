@@ -1,5 +1,6 @@
 from tkinter import Tk, Label, Entry, Button, Frame, ttk
 import sqlite3
+from tkinter import messagebox
 
 def consultarSociosBD(idSocio):
     
@@ -55,15 +56,17 @@ class VentanaConsultarSocio:
     
     def aceptar(self):
         idSocio = self.txt_idSocio.get()
-        datosSocio = consultarSociosBD(idSocio)
-        for row in self.tree.get_children():
-            self.tree.delete(row)
-        for socio in datosSocio:
-            self.tree.insert('', 0, values=socio)
+        if not idSocio:
+            messagebox.showerror("Error", "Ingrese el codigo de socio a buscar.")
+        else:
+            datosSocio = consultarSociosBD(idSocio)
+            for row in self.tree.get_children():
+                self.tree.delete(row)
+            for socio in datosSocio:
+                self.tree.insert('', 0, values=socio)
 
     def cancelar(self):
         self.ventana.destroy()
 
     def mostrar(self):
         self.ventana.mainloop()
-
