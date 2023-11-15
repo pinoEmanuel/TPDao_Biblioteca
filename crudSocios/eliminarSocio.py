@@ -51,5 +51,3 @@ class VentanaEliminarSocio:
     
     def mostrar(self):
         self.ventana.mainloop()
-        
-VentanaEliminarSocio().mostrar()

@@ -7,11 +7,12 @@ def crearPrestamo(socio, libro, fecha, cantDiasDevolucion):
     conn = sqlite3.connect("./biblioteca.db")
     cursor = conn.cursor()
     
+    sql = '''UPDATE libros SET estado="Prestado" WHERE codigo=?'''
     cursor.execute('''INSERT INTO prestamos (idCliente, codigoLibro, fechaPrestamo, cantDiasDevolucion) VALUES (?, ?, ?, ?)''', (socio, libro, fecha, cantDiasDevolucion))
-    cursor.execute('''UPDATE libros SET estado="Prestado" WHERE codigo=?''', (libro))
+    cursor.execute(sql, (libro,))
     conn.commit()
     conn.close()
-    
+
     messagebox.showinfo("Éxito", "Prestamo agregado correctamente.")
 
 class VentanaAgregarPrestamo:

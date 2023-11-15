@@ -2,6 +2,18 @@ from tkinter import Tk, Label, Entry, Button, Frame, ttk
 import sqlite3
 from tkinter import messagebox
 
+def buscarTodosSocios():
+    conn = sqlite3.connect("./biblioteca.db")
+    cursor = conn.cursor()
+    cursor.execute('''SELECT p.* FROM socios p''')
+
+    resultado = cursor.fetchall()
+
+    conn.commit()
+    conn.close()
+
+    return resultado
+
 def consultarSociosBD(idSocio):
     
     conn = sqlite3.connect("./biblioteca.db")
@@ -46,12 +58,16 @@ class VentanaConsultarSocio:
         botones.grid(column=1, row=4, sticky="e")
         
         botonCancelar = Button(botones, text="Cancelar")
-        botonCancelar.pack(side="right", padx=10)
+        botonCancelar.pack(side="right")
         
         botonAceptar = Button(botones, text="Aceptar")
-        botonAceptar.pack(side="right")
+        botonAceptar.pack(side="right", padx=10)
+
+        botonBuscarTodos = Button(botones, text="Buscar Todos")
+        botonBuscarTodos.pack(side="right")
         
         botonAceptar["command"] = self.aceptar
+        botonBuscarTodos["command"] = self.buscarTodos
         botonCancelar["command"] = self.cancelar
     
     def aceptar(self):
@@ -64,6 +80,13 @@ class VentanaConsultarSocio:
                 self.tree.delete(row)
             for socio in datosSocio:
                 self.tree.insert('', 0, values=socio)
+
+    def buscarTodos(self):
+        datos = buscarTodosSocios()
+        for row in self.tree.get_children():
+            self.tree.delete(row)
+        for linea in datos:
+            self.tree.insert('', 0, values=linea)
 
     def cancelar(self):
         self.ventana.destroy()

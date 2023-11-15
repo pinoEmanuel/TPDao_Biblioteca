@@ -52,5 +52,3 @@ class VentanaEliminarLibro:
     
     def mostrar(self):
         self.ventana.mainloop()
-
-VentanaEliminarLibro().mostrar()

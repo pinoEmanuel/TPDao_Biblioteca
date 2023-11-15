@@ -16,22 +16,22 @@ class VentanaReportes:
         botones = Frame(self.ventana)
         botones.pack(padx=10, pady=50, anchor=NW)
         
-        botonLibXEstado = Button(botones, text="Cant libros por estado", width=20, height=2)
+        botonLibXEstado = Button(botones, text="Cantidad de libros en cada estado", width=40, height=2)
         botonLibXEstado.pack(side=TOP, padx=10, pady=5, anchor=W)   
           
-        botonSumatoria = Button(botones, text="Sumatoria precio rep", width=20, height=2)     
+        botonSumatoria = Button(botones, text="Sumatoria precio reposicion", width=40, height=2)     
         botonSumatoria.pack(side=TOP, padx=10, pady=5, anchor=W) 
         
-        botonSolicitantes = Button(botones, text="Solicitantes libro", width=20, height=2)     
+        botonSolicitantes = Button(botones, text="Solicitantes de libro", width=40, height=2)     
         botonSolicitantes.pack(side=TOP, padx=10, pady=5, anchor=W) 
         
-        botonPrestamosSocio = Button(botones, text="Prestamos de socio", width=20, height=2)     
+        botonPrestamosSocio = Button(botones, text="Prestamos de socio", width=40, height=2)     
         botonPrestamosSocio.pack(side=TOP, padx=10, pady=5, anchor=W) 
             
-        botonDemorados = Button(botones, text="Prestamos demorados", width=20, height=2) 
+        botonDemorados = Button(botones, text="Prestamos demorados", width=40, height=2) 
         botonDemorados.pack(side=TOP, padx=10, pady=5, anchor=W)
 
-        botonCancelar = Button(text="Salir", width=20, height=2)
+        botonCancelar = Button(botones, text="Salir", width=40, height=2)
         botonCancelar.pack(side=RIGHT, anchor=SE, padx=10, pady=5)
 
         botonLibXEstado["command"] = self.cantidadLibrosXEstado
@@ -39,7 +39,7 @@ class VentanaReportes:
         botonSolicitantes["command"] = self.solicitantesLibroXTitulo
         botonPrestamosSocio["command"] = self.prestamosDeSocio
         botonDemorados["command"] = self.prestamosDemorados
-        botonCancelar["command"] = self.cancelar
+        botonCancelar["command"] = self.volver
         
     def cantidadLibrosXEstado(self):
         nuevaVentana = VentanaCantidadLibrosXEstado()
@@ -61,47 +61,9 @@ class VentanaReportes:
         nuevaVentana = VentanaDemorados()
         nuevaVentana.mostrar()
 
-    def cancelar(self):
+    def volver(self):
         self.ventana.destroy()
         
     def mostrar(self):
         self.ventana.mainloop()
 
-# def cantLibrosXEstado(self):
-#     c = [0, 0, 0]
-#     for l in self.libros:
-#         if l.estado.lower() == "disponible":
-#             c[0] += 1
-#         elif l.estado.lower() == "prestado":
-#             c[1] += 1
-#         elif l.estado.lower() == "extraviado":
-#             c[2] += 1
-#     return "Cantidad de libros por estado:\nDisponible: " + c[0] + "\nPrestado: " + c[1] + "\nExtraviado: " + c[2]
-#
-# def sumatoriaPrecioRep(self):
-#     c = 0
-#     for l in self.libros:
-#         if l.estado.lower() == "extraviado":
-#             c += l.precioReposicion
-#     return "Sumatoria de precio de reposicion:\n" + c
-#
-# def solicitantesDeLibro(self, libro):
-#     pass
-#
-# def prestamosDeSocio(self, nroSocio):
-#     prestamos = []
-#     for s in self.socios:
-#         if s.idCliente == nroSocio:
-#             for p in self.prestamos:
-#                 if p.socio == s:
-#                     prestamos.append(p)
-#     if prestamos.len()==0:
-#     return prestamos
-#
-#
-# def prestamosDemorados(self):
-#     demorados = []
-#     for p in self.prestamos:
-#         if p.esDemorado():
-#             demorados.append(p)
-#     return demorados

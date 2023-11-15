@@ -2,6 +2,18 @@ from tkinter import Tk, Label, Entry, Button, Frame, ttk
 import sqlite3
 from tkinter import messagebox
 
+def buscarTodosLibros():
+    conn = sqlite3.connect("./biblioteca.db")
+    cursor = conn.cursor()
+    cursor.execute('''SELECT p.* FROM libros p''')
+
+    resultado = cursor.fetchall()
+
+    conn.commit()
+    conn.close()
+
+    return resultado
+
 def consultarLibrosBD(titulo):
     
     conn = sqlite3.connect("./biblioteca.db")
@@ -10,15 +22,11 @@ def consultarLibrosBD(titulo):
     cursor.execute(sql, (titulo,))
     
     resultado = cursor.fetchall()
-    
-    libros = []
-    for libro in resultado:
-        libros.append(libro)
 
     conn.commit()
     conn.close()
 
-    return libros
+    return resultado
 
 class VentanaConsultarLibro:
     def __init__(self):
@@ -48,12 +56,16 @@ class VentanaConsultarLibro:
         botones.grid(column=1, row=4, sticky="e")
         
         botonCancelar = Button(botones, text="Cancelar")
-        botonCancelar.pack(side="right", padx=10)
+        botonCancelar.pack(side="right")
         
         botonAceptar = Button(botones, text="Aceptar")
-        botonAceptar.pack(side="right")
+        botonAceptar.pack(side="right", padx=10)
+
+        botonBuscarTodos = Button(botones, text="Buscar Todos")
+        botonBuscarTodos.pack(side="right")
         
         botonAceptar["command"] = self.aceptar
+        botonBuscarTodos["command"] = self.buscarTodos
         botonCancelar["command"] = self.cancelar
     
     def aceptar(self):
@@ -67,7 +79,12 @@ class VentanaConsultarLibro:
             for libro in datosLibro:
                 self.tree.insert('', 0, values=libro)
             
-        
+    def buscarTodos(self):
+        datos = buscarTodosLibros()
+        for row in self.tree.get_children():
+            self.tree.delete(row)
+        for linea in datos:
+            self.tree.insert('', 0, values=linea)
         
     def cancelar(self):
         self.ventana.destroy()

@@ -16,7 +16,7 @@ class VentanaMain:
         self.ventana = Tk()
         
         self.ventana.title("Biblioteca")
-        self.ventana.geometry("600x600")
+        self.ventana.geometry("650x650")
         
         botones = Frame(self.ventana)
         botones.pack(padx=10, pady=50, anchor=NW)
